@@ -49,7 +49,7 @@ export class CandidateComponent implements OnInit{
 
   fetchCandidates(table_name: String): void {
     console.log("fetch:",this.table_name)
-    const apiUrl = `http://localhost:8080/api/${this.table_name}`;
+    const apiUrl = `http://localhost:8181/api/${this.table_name}`;
   
     // Initialize tableHeaders as an empty array
     this.tableHeaders = [];
@@ -76,7 +76,7 @@ export class CandidateComponent implements OnInit{
   
   
   addCandidate() {
-    const apiUrl = `http://localhost:8080/api/${this.table_name}`;
+    const apiUrl = `http://localhost:8181/api/${this.table_name}`;
 
     this.http.post(apiUrl, this.newCandidate)
       .subscribe(
@@ -110,7 +110,7 @@ export class CandidateComponent implements OnInit{
   deleteCandidate(candidate: number){
     // Implement your delete logic here
     this.id_num=Object.values(candidate)[0]
-    const apiUrl = `http://localhost:8080/api/${this.table_name}/deleteById/${this.id_num}`;
+    const apiUrl = `http://localhost:8181/api/${this.table_name}/deleteById/${this.id_num}`;
     console.log("delete",this.id_num)
 
     this.http.delete(apiUrl)
@@ -131,7 +131,7 @@ export class CandidateComponent implements OnInit{
 
   getColumnnames(table_name: String): void{
     console.log("entity:",this.table_name)
-    const apiUrl = `http://localhost:8080/api/${this.table_name}/columns`;
+    const apiUrl = `http://localhost:8181/api/${this.table_name}/columns`;
     
     
     this.http.get<any[]>(apiUrl)
