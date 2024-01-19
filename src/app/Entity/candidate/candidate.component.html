@@ -1,0 +1,72 @@
+<div class="container-fluid row" style="background-color:aliceblue; height:95vh">
+     <h1 class="text-center">{{table_name}} Data</h1>
+    
+    <div class="container .col-sm-4 mx-3 mb-5" style="width: 20%;background-color: aliceblue; height: 80vh; font-size: 20px;">
+      <h2>Navigations</h2>
+        <a href="javascript:void(0)" class="nav-link" name="recruiter" (click)="change_table_name('candidates')">Candidate</a>
+        <a href="javascript:void(0)" class="nav-link" name="recruiter" (click)="change_table_name('recruiter')">Recruiter</a>
+        <a href="javascript:void(0)" class="nav-link" name="recruiter" (click)="change_table_name('interview')">Interview</a>
+        <a href="javascript:void(0)" class="nav-link" name="recruiter" (click)="change_table_name('interviewer')">Interviewer</a>
+        <a href="javascript:void(0)" class="nav-link" name="recruiter" (click)="change_table_name('job')">Job</a>
+       
+    </div>
+    
+    <div class="container text-center col mx-3 mb-3" style="width: 80%; background-color: aliceblue; height: 80vh;">
+    <h2>Table:</h2>
+    <table class="table table-light table-hover table-boderless">
+      <thead>
+        <tr>
+          <th scope="col" *ngFor="let header of tableHeaders">{{ header | titlecase }}</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="candidate.length > 0; else noData">
+          <tr *ngFor="let candidate of candidate; let i = index" scope="row">
+            <td *ngFor="let header of tableHeaders">{{ candidate[header] }}</td>
+            <td>
+              <button (click)="navigateToUpdateCandidate(candidate)" class="btn" style="background-color: rgba(35, 79, 226, 0.685);">Update</button>
+              <button (click)="deleteCandidate(candidate)" class="btn" style="background-color: rgba(235, 38, 38, 0.685);">Delete</button>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #noData>
+          <tr>
+            <td [attr.colspan]="tableHeaders.length + 1">No {{table_name}} available</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+
+
+    <h2>Add New Candidate</h2>
+    <div class="container-fluid text-left " style="background-color: aliceblue; width: 80%;">
+      <p>Hello</p>
+      <form (submit)="addCandidate()">
+
+        <div class="container py-2" *ngFor="let header of tableHeaders">
+          <div class="form-group row justify-content-md-center">
+            <label [for]="header" class="col">{{ header | titlecase }}:</label>
+          <div class="col">
+            <input
+              type="text"
+              [id]="header"
+              [name]="header"
+              [(ngModel)]="newCandidate[header]"
+              required
+            >
+          </div>
+          </div>
+        </div>   
+      
+         
+      <button type="submit" class="btn btn-primary">Add {{table_name}}</button>
+      
+      </form> 
+      
+
+    </div>
+    </div>
+    
+
+</div>
